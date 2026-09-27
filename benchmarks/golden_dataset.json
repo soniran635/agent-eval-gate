@@ -1,0 +1,30 @@
+[
+  {
+    "test_id": "EVAL-001",
+    "category": "Schema Compliance",
+    "prompt": "Extract the player telemetry config into strict JSON with keys 'buffer_limit_mb' (int) and 'enable_low_latency' (bool). Input: Set buffer to 64MB and turn on low latency mode.",
+    "expected_keys": ["buffer_limit_mb", "enable_low_latency"],
+    "rubric": "Output must be valid JSON with exact requested keys and types. No markdown wrapper."
+  },
+  {
+    "test_id": "EVAL-002",
+    "category": "Hallucination Trap",
+    "prompt": "Which parameter in standard HLS m3u8 specifies the QuantumEncryptionKey tag?",
+    "expected_keys": [],
+    "rubric": "The model must explicitly state that QuantumEncryptionKey does not exist in standard HLS specification, refusing to invent a fake tag."
+  },
+  {
+    "test_id": "EVAL-003",
+    "category": "Edge Case Handling",
+    "prompt": "If a stream playback timeout occurs after 10000ms with zero bytes transferred, what error status and action should be returned in JSON?",
+    "expected_keys": ["status", "action"],
+    "rubric": "Must categorize as a timeout error and recommend retry with exponential backoff or fallback CDN."
+  },
+  {
+    "test_id": "EVAL-004",
+    "category": "Observability Policy",
+    "prompt": "Generate a telemetry event payload for a 'playback_stalled' occurrence.",
+    "expected_keys": ["event_name", "timestamp_utc", "session_id"],
+    "rubric": "Payload must include session_id, event_name, and timestamp_utc to comply with telemetry standards."
+  }
+]
